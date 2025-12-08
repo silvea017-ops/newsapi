@@ -1,12 +1,11 @@
+import { useContext } from "react";
 import FilterButtons from "./FilterButtons";
 import SearchForm from "./SearchForm";
+import { StatusContext } from "../store/status-context";
 
-export default function MainHeader({
-  callStatus,
-  handleChangeStatus,
-  handleSearch,
-  inputRef,
-}) {
+export default function MainHeader({ handleSearch, inputRef }) {
+  const { callStatus } = useContext(StatusContext);
+
   return (
     <header className="flex flex-col gap-6 text-center sm:text-left">
       <div className="space-y-4">
@@ -17,10 +16,7 @@ export default function MainHeader({
           전세계 다양한 소식을 보여줍니다
         </p>
       </div>
-      <FilterButtons
-        callStatus={callStatus}
-        handleChangeStatus={handleChangeStatus}
-      />
+      <FilterButtons />
       {callStatus === "everything" && (
         <SearchForm onSearch={handleSearch} inputRef={inputRef} />
       )}
